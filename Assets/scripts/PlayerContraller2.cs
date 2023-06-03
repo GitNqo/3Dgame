@@ -10,6 +10,8 @@ private Rigidbody rb; // Rididbody
     [SerializeField] float gravityModifier;//重力値調整用
     [SerializeField] float jumpForce;//ジャンプ力
     [SerializeField] bool isOnGround;//地面についているか
+    [SerializeField]ParticleSystem exposionParticle;
+    [SerializeField]ParticleSystem dirtsplatterParticle;
     public bool gameOver;
     Animator playerAnim;
 
@@ -19,6 +21,7 @@ private Rigidbody rb; // Rididbody
         rb = GetComponent<Rigidbody>();
         Physics.gravity *= gravityModifier;
         playerAnim = GetComponent<Animator>();
+        dirtsplatterParticle.Play();
 
     }
 
@@ -49,6 +52,8 @@ private Rigidbody rb; // Rididbody
             gameOver = true;
             playerAnim.SetBool("Death_b" , true);
             playerAnim.SetInteger("DeathType_int" , 2);
+            exposionParticle.Play();
+            dirtsplatterParticle.Stop();
         }
 
     }
